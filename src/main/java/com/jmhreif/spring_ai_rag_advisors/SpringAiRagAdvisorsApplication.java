@@ -28,7 +28,6 @@ public class SpringAiRagAdvisorsApplication {
 		return Neo4jVectorStore.builder(driver, embeddingModel)
 				.indexName("book-descriptions")
 				.label("Book")
-                .idProperty("book_id")
 				.initializeSchema(false)
 				.build();
 	}

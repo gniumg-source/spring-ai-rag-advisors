@@ -19,6 +19,7 @@ http ":8080/retrievalAdvisor?query=I am feeling a bit sad and overwhelmed by the
 http ":8080/retrieveFilter?query=I am looking for a relaxing and easy read for a mountain vacation"
 
 http ":8080/retrieveJoin?query=I'd like to read something about personal growth and small town living"
+http ":8080/retrieveJoin?query=I want to challenge my mind and would like to read something about technology"
 
 http ":8080/retrieveAugment?query=I want to challenge my mind and would like to read something about technology"
 ----

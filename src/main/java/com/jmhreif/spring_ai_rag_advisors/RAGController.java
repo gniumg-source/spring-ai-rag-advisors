@@ -7,6 +7,7 @@ import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvi
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.rag.preretrieval.query.transformation.RewriteQueryTransformer;
+import org.springframework.ai.rag.retrieval.join.ConcatenationDocumentJoiner;
 import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.ai.vectorstore.neo4j.Neo4jVectorStore;
@@ -59,10 +60,10 @@ public class RAGController {
 
         return chatClient.prompt()
                 .system(prompt)
+                .user(query)
                 .advisors(new SimpleLoggerAdvisor(),
                         retrievalAdvisor,
                         graphRetrievalAdvisor)
-                .user(query)
                 .call()
                 .content();
     }
@@ -118,6 +119,7 @@ public class RAGController {
                 .documentRetriever(VectorStoreDocumentRetriever.builder()
                         .vectorStore(vectorStoreBooks)
                         .build())
+                .documentJoiner(new ConcatenationDocumentJoiner())
                 .build();
 
         return chatClient.prompt()
@@ -141,7 +143,8 @@ public class RAGController {
 
         return chatClient.prompt()
                 .system(prompt)
-                .advisors(new SimpleLoggerAdvisor(), retrieveAugmentAdvisor)
+                .advisors(new SimpleLoggerAdvisor(),
+                        retrieveAugmentAdvisor)
                 .user(query)
                 .call()
                 .content();

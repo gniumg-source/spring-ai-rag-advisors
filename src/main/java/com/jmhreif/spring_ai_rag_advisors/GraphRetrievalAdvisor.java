@@ -47,7 +47,6 @@ public class GraphRetrievalAdvisor implements CallAdvisor {
 
         var updatedRequest = ChatClientRequest.builder()
                 .prompt(updatedPrompt)
-//                .context(chatClientRequest.context())
                 .context(Map.of()) //Clear the context
                 .build();
         System.out.println("----- Updated request -----");
